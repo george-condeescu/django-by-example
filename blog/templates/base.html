@@ -1,0 +1,20 @@
+{% load static %}
+<html>
+<head>
+<title>{% block title %}{% endblock %}</title>
+<link href="{% static '/blog/css/blog.css' %}" rel="stylesheet">
+<link rel="shortcut icon" type="image/ico" href="{% static 'favicon.ico' %}"/>
+{% comment %} <link rel="stylesheet" type="text/css" href="{% static "fontawesome/css/all.css" %}" /> {% endcomment %}
+<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+</head>
+<body>
+<div id="content">
+{% block content %}
+{% endblock %}
+</div>
+<div id="sidebar">
+<h2>My blog</h2>
+<p>This is my blog</p>
+</div>
+</body>
+</html>

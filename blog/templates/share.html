@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h3>Share <span class ="shtitle">"{{post.title}}"</span></h3>
+<hr/>
+{% if sent %}
+<h3>Email successfully sent</h3>
+<hr/>
+"{{post.title}}" was successfully sent by e-mail.
+{% else %}
+
+<form action="" method="POST">
+{%csrf_token %}
+{{ form.as_p }}
+<input type="submit" value="Send email"/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
+<br/><br/><br/><br/><br/><br/><br/>
+<a href="{% url 'blog:post_list' %}" class="btn_cancel">Cancel</a>
+</form>
+
+{% endif %}
+{% endblock %}

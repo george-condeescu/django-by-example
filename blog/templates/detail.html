@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+{% block content %}
+<a href="{% url 'blog:post_list' %}"><i class="fa fa-home"></i> Home</a>
+<h3>{{post.title}} details</h3>
+<hr/>
+<p>{{post.body}}</p>
+
+{% if post.status == 'published' %}
+<a href="{{post.share_url}}">Share this post</a>
+{% endif %}
+
+{% with comments.count as total_comments %}
+<h3>{{total_comments}} comment{{total_comments|pluralize}}</h3>
+{% endwith %}
+{% for comment in comments %}
+<div class="comment">
+<p class="info">
+Comment {{forloop.counter}} by {{comment.name}} <i>( {{comment.created}} )</i></p>
+{{comment.body|linebreaks}}
+</div>
+{% empty %}
+    <p>No comments yet </p>
+{% endfor %}
+
+{% if new_comment %}
+<h3>Your comment has been added.</h3>
+{% else %}
+<h3>Add new comment</h3>
+<form action="" method="post">
+{{ comment_form.as_p }}
+{% csrf_token %}
+<p><input type="submit" value="Add comment"/></p>
+</form>
+
+{% endif %}
+
+{% endblock %}
