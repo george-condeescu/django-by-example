@@ -3,6 +3,7 @@ from django.utils import timezone
 from django.contrib.auth.models import User
 from django.urls import reverse
 from datetime import datetime
+from taggit.managers import TaggableManager
 
 # Create your models here.
 class PublishedManager(models.Manager):
@@ -33,6 +34,7 @@ class Post(models.Model):
     objects = models.Manager()
     published = PublishedManager()
     draft = DraftManager()
+    tags=TaggableManager()
 
     def __str__(self):
         return self.title
