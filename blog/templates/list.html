@@ -1,4 +1,6 @@
 {% extends 'base.html' %}
+{% load blog_tags %}
+
 {% block content%}
 <h1><a href="{% url 'blog:post_list'%}"><i class="fa fa-home"></i></a> Posts list</h1>
 
@@ -18,7 +20,7 @@ Tags: <code>{{post.tags.all|join:", "}}</code>
 </code>
 </p> 
 
-<p>{{post.body|truncatewords:30|linebreaks}}</p>
+<p>{{post.body|markdown|truncatewords_html:30}}</p>
 
 {% endfor %}
 <div class="pagination">

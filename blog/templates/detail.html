@@ -1,4 +1,6 @@
 {% extends 'base.html' %}
+{% load blog_tags %}
+
 {% block content %}
 <a href="{% url 'blog:post_list' %}"><i class="fa fa-home"></i> Home</a>
 <h3>{{post.title}} details</h3>
@@ -12,7 +14,7 @@ No similar posts.
 {% endfor %}
 </code>
 </p>
-<p>{{post.body}}</p>
+<p>{{post.body|markdown}}</p>
 
 {% if post.status == 'published' %}
 <a href="{{post.share_url}}">Share this post</a>
@@ -26,7 +28,7 @@ No similar posts.
 <div class="comment">
 <p class="info">
 Comment {{forloop.counter}} by {{comment.name}} <i>( {{comment.created}} )</i></p>
-{{comment.body|linebreaks}}
+{{comment.body|markdown}}
 </div>
 {% empty %}
     <p>No comments yet </p>

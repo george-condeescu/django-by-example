@@ -1,10 +1,10 @@
+{% load blog_tags %}
 {% load static %}
 <html>
 <head>
 <title>{% block title %}{% endblock %}</title>
 <link href="{% static '/blog/css/blog.css' %}" rel="stylesheet">
 <link rel="shortcut icon" type="image/ico" href="{% static 'favicon.ico' %}"/>
-{% comment %} <link rel="stylesheet" type="text/css" href="{% static "fontawesome/css/all.css" %}" /> {% endcomment %}
 <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
 </head>
 <body>
@@ -14,7 +14,18 @@
 </div>
 <div id="sidebar">
 <h2>My blog</h2>
-<p>This is my blog</p>
+<p>This is my blog.I write {% total_posts %} posts.</p>
+{% current_time "%Y-%m-%d %I:%M %p" as the_time %}
+<p>The time is {{ the_time }}.</p>
+<h4>Latest Published Posts:</h4>
+{% show_latest_posts 3 %}
+<h4>Most commented posts.</h4>
+{% get_most_commented_posts as most_commented_posts %}
+<ul>
+{% for post in most_commented_posts %}
+<li><a href="{{post.get_absolute_url}}">{{post.title}}</a></li>
+{% endfor %}
+</ul>
 </div>
 </body>
 </html>
