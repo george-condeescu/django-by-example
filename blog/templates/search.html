@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+{% block content %}
+{% if "query" in request.GET %}
+<h2>Post containing {{cd.query}}</h2>
+<h3>Found {{total_results}} result{{total_results|pluralize}}
+    {% for result in results %}
+        {% with post=result.object %}
+         <h3><a href="{{post.get_absolute_url}}">{{post.title}}</a></h3>
+         {{post.body|truncatewords:5}}
+        {% endwith %}
+    {% empty %}
+    <h1>no results</h1>
+    {% endfor %}
+{% else %}
+<h3>search for posts</h3>
+<form action="." method="get">
+{{form.as_p}}
+{% csrf_token %}
+<input type="submit" value="Search"/>
+</form>
+{% endif %}
+{% endblock %}
